@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authroutes");
 const connectToMongoDB = require("./database/connectToMongodb");
 const messageRoutes = require("./routes/messageroutes");
+const userRoutes = require("./routes/userRoutes");
+
 
 dotenv.config(); // Load the environment variables
 const app = express(); 
@@ -20,6 +22,8 @@ app.get("/",(req,res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
+
 
 
 app.listen(PORT,() => {
