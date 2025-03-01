@@ -6,10 +6,10 @@ const authRoutes = require("./routes/authroutes");
 const connectToMongoDB = require("./database/connectToMongodb");
 const messageRoutes = require("./routes/messageroutes");
 const userRoutes = require("./routes/userRoutes");
+const {app,server} = require('./socket/socket');
 
 
 dotenv.config(); // Load the environment variables
-const app = express(); 
 
 const PORT = process.env.PORT || 8000;
 
@@ -26,7 +26,11 @@ app.use("/api/users", userRoutes);
 
 
 
-app.listen(PORT,() => {
-    connectToMongoDB();
-    console.log(`Server running on port ${PORT}`);
+server.listen(PORT,() => {
+    try{
+        connectToMongoDB();
+        console.log(`Server running on port ${PORT}`);
+    }catch(err){
+        console.error("Error starting the server:", err);
+    }
 });
