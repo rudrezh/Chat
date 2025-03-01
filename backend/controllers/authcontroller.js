@@ -14,7 +14,7 @@ const signup = async (req,res) => {
         const user = await User.findOne({username});
 
         if(user){
-            res.status(400).json({error : "Username already exists"});
+            return res.status(400).json({error : "Username already exists"});
         }
         
         const salt = await bcrypt.genSalt(10);
@@ -42,7 +42,7 @@ const signup = async (req,res) => {
             });
         }
         else{
-            res.status(400).json({error:"Ivalid User data"});
+            return res.status(400).json({error:"Ivalid User data"});
         }
 
     }catch(error){
